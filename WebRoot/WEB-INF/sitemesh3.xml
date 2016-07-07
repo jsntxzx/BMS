@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sitemesh>
+	<mapping path="/*" decorator="/WEB-INF/template-web.jsp" />
+	
+	<mapping path="/jsonService*" exclue="true"/>
+	<mapping path="/jsp*" exclue="true"/>
+	<mapping path="/editor*" exclue="true"/>
+</sitemesh>
