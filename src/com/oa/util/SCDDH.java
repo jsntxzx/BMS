@@ -1,4 +1,4 @@
-package com.oa.util;
+﻿package com.oa.util;
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
