@@ -1,5 +1,6 @@
 ﻿<%@ page language="java" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="/WEB-INF/c.tld"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
@@ -11,7 +12,7 @@
 <html>
 	<head>
 		<base href="<%=basePath%>" />
-		<title>Group3 Book Manage Sysytem - <sitemesh:write property='title' />
+		<title><spring:message code="systemname"></spring:message>- <sitemesh:write property='title' />
 		</title>
 		<link rel="stylesheet" href="css/agentStyle.css" type="text/css"></link>
 		<link rel="stylesheet" href="css/style.css" type="text/css"></link>
@@ -23,11 +24,6 @@
 		</script>
 		<![endif]-->
 
-		<script language="javascript">
-			function tuichu() {
-				return confirm("确定退出系统吗？");
-			}
-		</script>
 	</head>
 	<body>
 		<div class="ymst"></div>
@@ -37,7 +33,7 @@
 				<tr>
 					<td class="htlogo_m">
 						<img src="image/logo.jpg"></img>
-						书籍管理系统
+						<spring:message code="systemname"></spring:message>
 						<span class="beat">beta</span>
 					</td>
 					<td>
@@ -52,20 +48,20 @@
 								</td>
 								<td style="line-height: 30px">
 									<p>
-										<span class="zgly">图书管理员</span>
+										<span class="zgly"><spring:message code="adminname"></spring:message></span>
 									</p>									
 								</td>
 							</tr>
 						</table>
 					</td>
 					<td class="touxiang" width="260" align="right">
-					<a href="welcome.html">主页</a> &nbsp;
+					<a href="welcome.html"><spring:message code="mainpage"></spring:message></a> &nbsp;
 						
-						<!-- 
+						
 						<font color="#E7E7EB">|</font>&nbsp;
-						<a href="login/passWord.html">修改密码</a> &nbsp;
+						<a href="?language=zh_CN"><spring:message code="lan1"></spring:message></a></a> &nbsp;
 						<font color="#E7E7EB">|</font>&nbsp;
-						<a href="login/quit.html" onclick="return tuichu()">退出</a> -->
+						<a href="?language=en"><spring:message code="lan2"></spring:message></a></a> 
 					</td>
 				</tr>
 			</table>
@@ -79,31 +75,31 @@
 					<br />
 					<p>
 						<img src="image/icon_menu_statistics.png" align="absmiddle" />
-						&nbsp; 员工管理
+						&nbsp; <spring:message code="category1"></spring:message>
 					</p>
 					<ul class="m_ul">
 						<li>
-							<a href="employee/list.html" id="dltj">员工列表</a>
+							<a href="employee/list.html" id="dltj"><spring:message code="item1"></spring:message></a>
 						</li>				
 					</ul>
 					<hr class="m_hr" />
 					<p>
 						<img src="image/shezhi.png" align="absmiddle" />
-						&nbsp; 书籍管理
+						&nbsp; <spring:message code="category2"></spring:message>
 					</p>
 					<ul class="m_ul">
 						<li>
-							<a href="book/list.html" id="qyhzy">馆藏图书</a>
+							<a href="book/list.html" id="qyhzy"><spring:message code="item2"></spring:message></a>
 						</li>		
 					</ul>
 					<hr class="m_hr" />
 					<p>
 						<img src="image/shezhi.png" align="absmiddle" />
-						&nbsp; 图书操作
+						&nbsp; <spring:message code="category3"></spring:message>
 					</p>
 					<ul class="m_ul">
 						<li>
-							<a href="manage/list.html" id="scc">借阅列表</a>
+							<a href="manage/list.html" id="scc"><spring:message code="item3"></spring:message></a>
 						</li>						
 					</ul>
 				
@@ -114,7 +110,7 @@
 					<br />
 					<br />
 					<p style="font-size: 12px;">
-						反馈电话：025-12345678
+						<spring:message code="phone"></spring:message>025-12345678
 					</p>
 					<br />
 				</td>

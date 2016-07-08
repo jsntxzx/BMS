@@ -8,15 +8,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 
 @Controller
-@RequestMapping("welcome") 
+@RequestMapping
 public class SystemAction {
 	
-	
-	@RequestMapping
-	public String load(
+	/**
+	 * 进入系统主页
+	 * @param request
+	 * @param modelMap
+	 * @return
+	 */
+	@RequestMapping("welcome") 
+	public String welcome(
 			HttpServletRequest request,
 			ModelMap modelMap){
 		return "main" ;
 	}
-
 }

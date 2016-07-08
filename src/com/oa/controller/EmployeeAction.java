@@ -108,6 +108,7 @@ public class EmployeeAction {
 		return "page/employee/add";
 	}
 	
+	@SuppressWarnings("rawtypes")
 	@RequestMapping(value = "listborrow/{id}")
 	public String listborrow(HttpServletRequest request, ModelMap modelMap,
 			@PathVariable(value = "id") Integer id) {

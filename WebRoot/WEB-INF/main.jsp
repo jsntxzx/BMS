@@ -1,11 +1,9 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-<%@ taglib prefix="c" uri="/WEB-INF/c.tld"%>
-<%@ taglib prefix="fmt" uri="/WEB-INF/fmt.tld"%>
-
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE HTML>
 <html>
   <head>
-    <title>欢迎使用此系统</title>
+    <title><spring:message code="welcome"></spring:message></title>
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
