@@ -8,6 +8,7 @@ import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Criteria;
+import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
@@ -15,7 +16,6 @@ import org.hibernate.criterion.Disjunction;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
-import org.hibernate.type.StandardBasicTypes;
 import org.hibernate.type.Type;
 import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
@@ -357,8 +357,8 @@ public class EntityDaoImpl extends HibernateDaoSupport implements EntityDao {
 							SQLQuery qObj = session.createSQLQuery(queryString);
 							qObj.setFirstResult(start);
 							qObj.setMaxResults(pageSize);
-							qObj.addScalar("finish_time",  StandardBasicTypes.STRING);
-							qObj.addScalar("people_name",  StandardBasicTypes.STRING);
+							qObj.addScalar("finish_time",  Hibernate.STRING);
+							qObj.addScalar("people_name",  Hibernate.STRING);
 							List list = qObj.list();
 							paging.setList(list);
 
