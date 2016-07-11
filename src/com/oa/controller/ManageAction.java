@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.oa.config.SystemConfig;
 import com.oa.entity.Book;
 import com.oa.entity.Employee;
 import com.oa.entity.Record;
@@ -53,52 +54,7 @@ public class ManageAction {
 		return "page/manage/add";
 	}
 	
-	@SuppressWarnings("rawtypes")
-	@RequestMapping(value = "borrowcheck")
-	public String borrowcheck(HttpServletRequest request, ModelMap modelMap,
-			@RequestParam(value = "eid") Integer eid,
-			@RequestParam(value = "bid") Integer bid) {
-		String msg = "" ;
-		if(eid == null || bid == null){
-			msg = "<font color=red>请选择员工和所借书籍</font>" ;			
-		}
-		else{
-			Employee e = (Employee) es.getObjectById(Employee.class, eid);
-			Book b = (Book) bs.getObjectById(Book.class, bid);
-			int count = rs.getBorrowCountByEmployee(e);
-			if(count > 5){
-				msg = "<font color=red>该员工借书数目超过5本</font>" ;
-			}
-			else if(b.getLeftcopy() == 0){
-				msg = "<font color=red>所借书籍已经全部借出</font>" ;
-			}
-			else{
-				Record r = new Record() ;
-				r.setAddtime(new Date());
-				r.setBid(b);
-				r.setEid(e);
-				r.setStatus(0);
-			
-				int left = b.getLeftcopy() - 1 ;
-				b.setLeftcopy(left);
-				
-				if(db.saveBookAndRecord(b, r)){
-					msg =  "<font color=blue>借书成功</font>" ;
-				}
-				else{
-					msg =  "<font color=red>借书失败</font>" ;
-				}
-			}
-			
-		}
-		List el = es.getAll(Employee.class) ;
-		List bl = bs.getAll(Book.class) ;
-		modelMap.put("addf", msg);
-		modelMap.put("el", el);
-		modelMap.put("bl", bl);
-		return "page/manage/add";
-	}
-	
+
 	@SuppressWarnings("rawtypes")
 	@RequestMapping(value="list")
 	public String list(HttpServletRequest request,
@@ -130,13 +86,90 @@ public class ManageAction {
 	}
 	
 	
+	/**
+	 * 
+	 * 借书
+	 * @param request
+	 * @param modelMap
+	 * @param eid
+	 * @param bid
+	 * @return
+	 */
+	@SuppressWarnings("rawtypes")
+	@RequestMapping(value = "borrowcheck")
+	public String borrowcheck(HttpServletRequest request, ModelMap modelMap,
+			@RequestParam(value = "eid") Integer eid,
+			@RequestParam(value = "bid") Integer bid) {
+		Integer msg = 0 ;
+		if(eid == null || bid == null){
+			msg = 1 ;			
+		}
+		else{
+			Employee e = (Employee) es.getObjectById(Employee.class, eid);
+			Book b = (Book) bs.getObjectById(Book.class, bid);
+
+			if(e.getBorrowcount() >= SystemConfig.borrowlimit){
+				msg = 2 ;
+			}
+			else if(b.getLeftcopy() == 0){
+				msg = 3 ;
+			}
+			else{
+				Record r = new Record() ;
+				r.setAddtime(new Date());
+				r.setBid(b);
+				r.setEid(e);
+				r.setStatus(0);
+				r.setAddtime(new Date());
+			
+				int left = (b.getLeftcopy()==null)?0:b.getLeftcopy() - 1 ;				
+				b.setLeftcopy(left);
+				
+				int bcount = (e.getBorrowcount()==null)?0:e.getBorrowcount() + 1 ;
+				e.setBorrowcount(bcount);
+				
+				if(db.saveBookAndEmployeeAndRecord(b, e, r)){
+					
+					msg =  5 ;
+				}
+				else{
+					msg =  4 ;
+				}
+			}
+			
+		}
+		List el = es.getAll(Employee.class) ;
+		List bl = bs.getAll(Book.class) ;
+		modelMap.put("addf", msg);
+		modelMap.put("el", el);
+		modelMap.put("bl", bl);
+		return "page/manage/add";
+	}
+	
+	
+	/**
+	 * 还书
+	 * @param request
+	 * @param modelMap
+	 * @param id
+	 * @return
+	 */
 	@RequestMapping(value = "return/{id}")
 	public String returnbook(HttpServletRequest request, ModelMap modelMap,
 			@PathVariable(value = "id") Integer id) {
 		Record r = (Record) rs.getObjectById(Record.class, id) ;		
 		r.setStatus(1);
-		rs.saveOrUpdate(r);
+		r.setRettime(new Date());
+		Employee e = r.getEid() ;
+		int bcount =(e.getBorrowcount()==null)?0:e.getBorrowcount() - 1 ;
+		e.setBorrowcount(bcount);
+		Book b = r.getBid() ;
+		int left =(b.getLeftcopy()==null)?0:b.getLeftcopy() + 1; 
+		b.setLeftcopy(left);
+		
+		db.saveBookAndEmployeeAndRecord(b, e, r);
 		return "redirect:/manage/list.html";
+		
 	}
 	
 	

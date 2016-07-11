@@ -25,6 +25,9 @@ public class Employee {
 	
 	@Column(name = "name", length = 50)
 	private String name;
+	
+	@Column(name = "borrowcount")
+	private Integer borrowcount;
 
 
 	public Integer getId() {
@@ -56,6 +59,16 @@ public class Employee {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+
+	public Integer getBorrowcount() {
+		return borrowcount;
+	}
+
+
+	public void setBorrowcount(Integer borrowcount) {
+		this.borrowcount = borrowcount;
 	}
 	
 	

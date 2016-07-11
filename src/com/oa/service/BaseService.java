@@ -19,11 +19,11 @@ public class BaseService {
 		return entityDao.saveOrUpdate(model);
 	}
 
-	public Object getObjectById(final Class cs, final Integer id) {
+	public Object getObjectById(final Class<?> cs, final Integer id) {
 		return entityDao.getObjectById(cs, id);
 	}
 
-	public Paging getAll(Class cs, Integer curPage, Integer pageSize,
+	public Paging getAll(Class<?> cs, Integer curPage, Integer pageSize,
 			Map<String, Object> map) {
 		Map<String, Object> orderMap = new LinkedHashMap<String, Object>();
 		orderMap.put("id", "asc");
@@ -32,32 +32,32 @@ public class BaseService {
 		return paging;
 	}
 
-	public Paging getAll(Class cs, Integer curPage, Integer pageSize,
+	public Paging getAll(Class<?> cs, Integer curPage, Integer pageSize,
 			Map<String, Object> map, Map<String, Object> orderMap) {
 		Paging paging = entityDao.createQueryPaging(cs, map, orderMap, curPage,
 				pageSize);
 		return paging;
 	}
 
-	public List getAll(Class cs, Map<String, Object> map) {
+	public List<?> getAll(Class<?> cs, Map<String, Object> map) {
 
 		Map<String, Object> orderMap = new LinkedHashMap<String, Object>();
 		orderMap.put("id", "asc");
 		return entityDao.createCriteria(cs, map, orderMap);
 	}
 	
-	public List getAll(Class cs, Map<String, Object> map, Map<String, Object> orderMap) {
+	public List<?> getAll(Class<?> cs, Map<String, Object> map, Map<String, Object> orderMap) {
 		return entityDao.createCriteria(cs, map, orderMap);
 	}
 
-	public List getAll(Class cs) {
+	public List<?> getAll(Class<?> cs) {
 
 		Map<String, Object> orderMap = new LinkedHashMap<String, Object>();
 		orderMap.put("id", "asc");
 		return entityDao.createCriteria(cs, null, orderMap);
 	}
 	
-	public List getAllByOrder(Class cs, String key , String order) {
+	public List<?> getAllByOrder(Class<?> cs, String key , String order) {
 
 		Map<String, Object> orderMap = new LinkedHashMap<String, Object>();
 		orderMap.put(key, order);

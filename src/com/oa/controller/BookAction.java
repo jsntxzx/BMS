@@ -59,22 +59,21 @@ public class BookAction {
 			@RequestParam(value = "id") Integer id,
 			@RequestParam(value = "title") String title,
 			@RequestParam(value = "sn") String sn,
-			@RequestParam(value = "totalcopy") Integer totalcopy,
-			@RequestParam(value = "leftcopy") Integer leftcopy) {
+			@RequestParam(value = "totalcopy") Integer totalcopy) {
 		Book n = null ;
 
 		if(id == null)
 		{
-			n = new Book() ;			
+			n = new Book() ;
+			n.setLeftcopy(totalcopy);
 		}
 		else
 		{
 			n = (Book) bs.getObjectById(Book.class, id);
 		}
 		n.setTitle(title);
-		n.setSn(sn);
-		n.setTotalcopy(totalcopy);
-		n.setLeftcopy(leftcopy);
+		n.setSn(sn);	
+		n.setTotalcopy(totalcopy);		
 		bs.saveOrUpdate(n);
 		attr.addAttribute("key", request.getSession().getAttribute("key"));
 		attr.addAttribute("value", request.getSession().getAttribute("value"));

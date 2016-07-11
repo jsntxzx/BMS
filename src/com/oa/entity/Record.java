@@ -45,6 +45,9 @@ public class Record {
 	private Date addtime;
 	
 	
+	@Column(name = "ret_time")
+	private Date rettime;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -92,6 +95,16 @@ public class Record {
 
 	public void setAddtime(Date addtime) {
 		this.addtime = addtime;
+	}
+
+
+	public Date getRettime() {
+		return rettime;
+	}
+
+
+	public void setRettime(Date rettime) {
+		this.rettime = rettime;
 	}
 
 	

@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="/WEB-INF/c.tld"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
@@ -39,7 +40,11 @@
 			<p class="dqgongneng"> 
 				借书操作 
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-				<font color="red"> ${addf}</font>
+				<c:if test="${addf eq 1 }"><font color="red"><spring:message code="msg1"></spring:message></font></c:if>
+				<c:if test="${addf eq 2 }"><font color="red"><spring:message code="msg2"></spring:message></font></c:if>
+				<c:if test="${addf eq 3 }"><font color="red"><spring:message code="msg3"></spring:message></font></c:if>
+				<c:if test="${addf eq 4 }"><font color="red"><spring:message code="msg4"></spring:message></font></c:if>
+				<c:if test="${addf eq 5 }"><font color="blue"><spring:message code="msg5"></spring:message></font></c:if>
 			</p>
 			<br />
 			<table width="96%" cellpadding="0" cellspacing="0" class="taba"

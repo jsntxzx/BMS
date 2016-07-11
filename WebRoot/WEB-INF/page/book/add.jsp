@@ -68,15 +68,7 @@
 					<td>
 						<input type="text" name="totalcopy" value="${dhl.totalcopy}"/>
 					</td>
-				</tr>
-				<tr>
-					<td bgcolor="#F4F5F9" >
-						可借数目
-					</td>
-					<td>
-						<input type="text" name="leftcopy" value="${dhl.leftcopy}"/>
-					</td>
-				</tr>				
+				</tr>		
 				</table>
 
 			<input type="hidden" name="id" value="${dhl.id}">

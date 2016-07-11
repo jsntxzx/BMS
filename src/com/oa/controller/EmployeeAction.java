@@ -71,7 +71,8 @@ public class EmployeeAction {
 
 		if(id == null)
 		{
-			n = new Employee() ;			
+			n = new Employee() ;
+			n.setBorrowcount(0);
 		}
 		else
 		{

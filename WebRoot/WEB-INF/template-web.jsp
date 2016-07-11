@@ -122,7 +122,7 @@
 		<br />
 		<div class="guanyu">
 			<div class="guanyu_neirong">
-				 Copyright © 2016-2018 Trend School Group 3 .All Rights Reserved.
+				 Copyright © 2016-2016 Trend School Group 3 .All Rights Reserved.
 			</div>
 		</div>
 	
