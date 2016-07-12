@@ -3,11 +3,11 @@
 <%@ taglib prefix="c" uri="/WEB-INF/c.tld"%>
 <%@ taglib prefix="fmt" uri="/WEB-INF/fmt.tld"%>
 <%@ taglib uri="/WEB-INF/Pagination.tld" prefix="p"%>
-
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>商品编辑</title>
+		<title><spring:message code="empolyee-BorrowBook"></spring:message></title>
 		<meta http-equiv="pragma" content="no-cache">
 		<meta http-equiv="cache-control" content="no-cache">
 		<meta http-equiv="expires" content="0">
@@ -32,18 +32,18 @@
 	</head>
 	<body>
 		<p class="dqgongneng">
-			员工借书情况
+		<spring:message code="empolyee-BorrowStatus"></spring:message>
 		</p>
 		<br />
 			<table width="96%" cellpadding="0" cellspacing="0" class="taba" 	border="0">
 		<tr>
-			<td bgcolor="#F4F5F9" width="150">员工姓名</td>
+			<td bgcolor="#F4F5F9" width="150"><spring:message code="empolyee-Name"></spring:message></td>
 			<td>
 				${basic.name }
 			</td>
 		</tr>
 		<tr>
-			<td bgcolor="#F4F5F9" width="150">员工工号</td>
+			<td bgcolor="#F4F5F9" width="150"><spring:message code="empolyee-ID"></spring:message></td>
 			<td>
 				${basic.enumber }
 			</td>
@@ -52,26 +52,30 @@
 							
 						
 		<tr>
-			<td bgcolor="#F4F5F9">在借图书</td>
+			<td bgcolor="#F4F5F9"><spring:message code="empolyee-CurrentlyBorrowed"></spring:message></td>
 			<td>
 			<c:if test="${fn:length(list) gt 0}">
 				<table frame="void" border="0" cellspacing="0" cellpadding="0">
 					<tr>
-						<th>书籍标题</th>
-						<th>书籍SN</th>
-						 <th>借书时间</th>						
+						<th><spring:message code="empolyee-BookTitle"></spring:message></th>
+						<th><spring:message code="empolyee-SNNumber"></spring:message></th>
+						<th><spring:message code="empolyee-BorrowedTime"></spring:message></th>	
+						<th><spring:message code="empolyee-Operation"></spring:message></th>						
 					</tr>
 					<c:forEach items="${list}" var="v" varStatus="index">
 						<tr>
 							<td>${v.bid.title }</td>
 							<td>${v.bid.sn }</td>
 							<td><fmt:formatDate value="${v.addtime }" pattern="yyyy-MM-dd HH:mm:ss"/> </td>
+							<td><a href="manage/return/${v.id}.html"><img
+									src="image/update.png" title="<spring:message code="manage-ReturnBook"></spring:message>" /></a>
+							 </td>
 						</tr>
 					</c:forEach>
 				</table>
 				</c:if>	
 				<c:if test="${fn:length(list) eq 0}">
-					当前未借图书
+					<spring:message code="empolyee-CurrentlyNotBorrowed"></spring:message>
 				</c:if>
 			</td>
 		</tr>

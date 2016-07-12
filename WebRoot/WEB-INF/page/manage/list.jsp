@@ -3,11 +3,11 @@
 <%@ taglib prefix="c" uri="/WEB-INF/c.tld"%>
 <%@ taglib prefix="fmt" uri="/WEB-INF/fmt.tld"%>
 <%@ taglib uri="/WEB-INF/Pagination.tld" prefix="p"%>
-
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>会员</title>
+		<title><spring:message code="manage-BorrowBook"></spring:message></title>
 		<meta http-equiv="pragma" content="no-cache">
 		<meta http-equiv="cache-control" content="no-cache">
 		<meta http-equiv="expires" content="0">
@@ -31,21 +31,24 @@
 		margin-left:20px;
 	}
 	</style>
+	<script type="text/javascript">
+  		var string = "<spring:message code='manage-NotFound' javaScriptEscape='true' />"
+	</script>
 	</head>
 	<body>
 		<p class="dqgongneng"> 
-			书籍借出记录
+			<spring:message code="manage-BorrowRecord"></spring:message>
 		</p>
 		<br />
 
 		<form action="manage/list.html" id="myform" method="post">
 			<div class="anniuweizhi">			
-		 		<a href="manage/add.html"><div>+ 借阅书籍</div></a>
+		 		<a href="manage/add.html"><div><spring:message code="manage-AddBorrowBook"></spring:message></div></a>
 			</div>
 			<div class="search">
 					<select name="eid" class="chosen-select" style="width: 300px" >
 							<option value="">
-										请选择
+										<spring:message code="manage-PleaseSelect"></spring:message>
 								</option>
 							<c:forEach items="${el}" var="v">
 									<option value="${v.id}" <c:if test="${eid eq v.id}">selected="selected"</c:if>>
@@ -55,7 +58,7 @@
 						</select>	
 					<select name="bid" class="chosen-select" style="width: 300px" >
 							<option value="">
-										请选择
+										<spring:message code="manage-PleaseSelect"></spring:message>
 								</option>
 							<c:forEach items="${bl}" var="v">
 									<option value="${v.id}" <c:if test="${bid eq v.id}">selected="selected"</c:if>> 
@@ -68,22 +71,22 @@
 			<table width="96%" cellpadding="0" cellspacing="0" class="taba" border="0">
 				<tr>
 					<th bgcolor="#F4F5F9" width="60">
-						序号
+						<spring:message code="manage-Sequence"></spring:message>
 					</th>
 					<th bgcolor="#F4F5F9">
-						借阅人
+						<spring:message code="manage-EmpolyeeName"></spring:message>
 					</th>
 					<th bgcolor="#F4F5F9">
-						借阅书籍
+						<spring:message code="manage-BorrowedBookTitle"></spring:message>
 					</th>
 					<th bgcolor="#F4F5F9">
-						借阅时间
+						<spring:message code="manage-BorrowedTime"></spring:message>
 					</th>
 					<th bgcolor="#F4F5F9">
-						状态
+						<spring:message code="manage-Status"></spring:message>
 					</th>
 					<th bgcolor="#F4F5F9" width="100">
-						操作
+						<spring:message code="manage-Operation"></spring:message>
 					</th>
 				</tr>
 				<c:forEach items="${paging.list}" var="v" varStatus="index">
@@ -101,14 +104,14 @@
 							<fmt:formatDate value="${v.addtime }" pattern="yyyy-MM-dd HH:mm:ss"/>
 						</td>
 						<td style="text-align: center">
-							<c:if test="${v.status eq 0}"><font color=red>未还</font></c:if>
-							<c:if test="${v.status eq 1}"><font color=blue>已还</font></c:if>
+							<c:if test="${v.status eq 0}"><font color=red><spring:message code="manage-NotReturn"></spring:message></font></c:if>
+							<c:if test="${v.status eq 1}"><font color=blue><spring:message code="manage-AlreadyReturn"></spring:message></font></c:if>
 						</td>
 						
 											
 						<td style="text-align: center">
 							<a href="manage/return/${v.id}.html"><img
-									src="image/update.png" title="还书" /></a>&nbsp;					
+									src="image/update.png" title="<spring:message code="manage-ReturnBook"></spring:message>" /></a>&nbsp;					
 
 						</td>
 					</tr>
@@ -124,8 +127,8 @@
 		<script type="text/javascript">
 		$(function() {
 			$('.chosen-select').chosen( {
-				'search_contains' : true,
-				no_results_text : '未搜索到'
+				search_contains : true,
+				no_results_text :  string
 			});
 		});
 	</script>

@@ -32,7 +32,7 @@
 				border="0">
 				<tr>
 					<td class="htlogo_m">
-						<img src="image/logo.jpg"></img>
+						<img src="image/trend_logo.png"></img>
 						<spring:message code="systemname"></spring:message>
 						<span class="beat">beta</span>
 					</td>

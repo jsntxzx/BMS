@@ -32,7 +32,7 @@
 	</head>
 	<body>
 		<p class="dqgongneng">
-			馆藏书籍管理
+			<spring:message code="book-BookManage"></spring:message>
 		</p>
 		<br />
 
@@ -41,21 +41,21 @@
 			<div class="anniuweizhi">
 				<select class="select_obj" name="key">
 					<option value="">
-						--请选择--
+						<spring:message code="book-PleaseSelect"></spring:message>
 					</option>
 					<option value="title%"
 						<c:if test="${key eq 'title%'}">selected="selected"</c:if>>
-						书名
+						<spring:message code="book-BookTitle"></spring:message>
 					</option>
 					<option value="sn%"
 						<c:if test="${key eq 'sn%'}">selected="selected"</c:if>>
-						SN号
+						<spring:message code="book-SNNumber"></spring:message>
 					</option>					
 				</select>
 				<input type="text" class="sousuo" name="value" value="${value}">
 				<input type="image" src="image/sousuo.png" />
 				<a href="book/add.html"><div>
-						+ 添加新书籍
+					<spring:message code="book-AddNewBooks"></spring:message>
 					</div>
 				</a>
 			</div>
@@ -63,22 +63,22 @@
 				border="0">
 				<tr>
 					<th bgcolor="#F4F5F9" width="60">
-						序号
+						<spring:message code="book-Sequence"></spring:message>
 					</th>
 					<th bgcolor="#F4F5F9">
-						书名
+						<spring:message code="book-BookTitle"></spring:message>
 					</th>
 					<th bgcolor="#F4F5F9">
-						SN号
+						<spring:message code="book-SNNumber"></spring:message>
 					</th>
 					<th bgcolor="#F4F5F9">
-						馆藏本数
+						<spring:message code="book-CopiesTotal"></spring:message>
 					</th>
 					<th bgcolor="#F4F5F9">
-						可借本数
+						<spring:message code="book-CopiesAvailable"></spring:message>
 					</th>
 					<th bgcolor="#F4F5F9" width="140">
-						操作
+						<spring:message code="book-Operation"></spring:message>
 					</th>
 				</tr>
 				<c:forEach items="${paging.list}" var="v" varStatus="index">
@@ -100,11 +100,11 @@
 						</td>					
 						<td style="text-align: center">
 							<a href="book/update/${v.id}.html"><img
-									src="image/update.png" title="修改" />
+									src="image/update.png" title=<spring:message code="book-Modify"></spring:message> />
 							</a>&nbsp;							
-							<a href="book/delete/${v.id}.html" onclick="return confirm('删除以后数据将不可恢复\n确定删除吗？')"> <img src="image/del.png"
-									title="删除书籍" />
-							</a>
+						<%-- 	<a href="book/delete/${v.id}.html" onclick="return confirm(<spring:message code="book-Warnning"></spring:message>)"> <img src="image/del.png"
+									title=<spring:message code="book-Delete"></spring:message> />
+							</a> --%>
 						</td>
 					</tr>
 				</c:forEach>

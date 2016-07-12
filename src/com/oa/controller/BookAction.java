@@ -93,7 +93,7 @@ public class BookAction {
 	public String delete(HttpServletRequest request, ModelMap modelMap,
 			@PathVariable(value = "id") Integer id) {
 		Book n = (Book) bs.getObjectById(Book.class, id);
-		bs.saveOrUpdate(n);
+		bs.delete(n);
 		return "redirect:/book/list.html";
 	}
 	

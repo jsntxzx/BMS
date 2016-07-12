@@ -13,7 +13,7 @@
 	<head>
 		<base href="<%=basePath%>">
 
-		<title>内容添加</title>
+		<title><spring:message code="manage-BorrowBook"></spring:message></title>
 
 		<meta http-equiv="pragma" content="no-cache">
 		<meta http-equiv="cache-control" content="no-cache">
@@ -31,14 +31,16 @@
 		}
 
 	</style>
-
+	<script type="text/javascript">
+  		var string = "<spring:message code='manage-NotFound' javaScriptEscape='true' />"
+	</script>
 	</head>
 
 	<body>
 		<form id="myform" name="myform" method="post"
 			action="manage/borrowcheck.html" >
 			<p class="dqgongneng"> 
-				借书操作 
+				<spring:message code="manage-BorrowBookAction"></spring:message>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
 				<c:if test="${addf eq 1 }"><font color="red"><spring:message code="msg1"></spring:message></font></c:if>
 				<c:if test="${addf eq 2 }"><font color="red"><spring:message code="msg2"></spring:message></font></c:if>
@@ -51,12 +53,12 @@
 				border="0" >
 				<tr>
 					<td bgcolor="#F4F5F9" width="180">
-						员工姓名
+					<spring:message code="manage-EmployeeName"></spring:message>
 					</td>
 					<td>
 						<select name="eid" class="chosen-select" style="width: 500px" >
 							<option value="">
-										请选择
+										<spring:message code="manage-PleaseSelect"></spring:message>
 								</option>
 							<c:forEach items="${el}" var="v">
 									<option value="${v.id}">
@@ -68,12 +70,12 @@
 				</tr>
 				<tr>
 					<td bgcolor="#F4F5F9" width="180">
-						书籍标题
+						<spring:message code="manage-BookTitle"></spring:message>
 					</td>
 					<td>
 						<select name="bid" class="chosen-select" style="width: 500px" >
 							<option value="">
-										请选择
+										<spring:message code="manage-PleaseSelect"></spring:message>
 								</option>
 							<c:forEach items="${bl}" var="v">
 									<option value="${v.id}">
@@ -88,9 +90,9 @@
 			<br />
 			<div style="text-align : center">
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="submit" value="提交" class="tjan">
+			<input type="submit" value=<spring:message code="manage-Submit"></spring:message> class="tjan">
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="button" value="返回" class="tjan" onclick=javascript:history.go(-1);;>
+			<input type="button" value=<spring:message code="manage-Return"></spring:message> class="tjan" onclick=javascript:history.go(-1);;>
 			<br />
 			<br />
 			</div>
@@ -101,7 +103,7 @@
 	$(function() {
 		$('.chosen-select').chosen( {
 			'search_contains' : true,
-			no_results_text : '未搜索到'
+			no_results_text : string
 		});
 	});
 </script>

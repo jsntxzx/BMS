@@ -62,10 +62,19 @@ public class BaseService {
 		Map<String, Object> orderMap = new LinkedHashMap<String, Object>();
 		orderMap.put(key, order);
 		return entityDao.createCriteria(cs, null, orderMap);
-	}
-	
+	}	
 
 	public void delete(Object model) {
 		entityDao.delete(model);
+	}
+	
+	public Integer getCount(Class<?> cs, Map<String, Object> map ){
+		Integer ret = 0 ;
+		List<?> l = entityDao.createCriteria(cs, map, null);
+		if(l != null && l.size() != 0)
+		{
+			ret = l.size();
+		}
+		return ret ;
 	}
 }

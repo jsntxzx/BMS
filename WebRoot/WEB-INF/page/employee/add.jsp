@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="/WEB-INF/c.tld"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
@@ -12,7 +13,7 @@
 	<head>
 		<base href="<%=basePath%>">
 
-		<title>内容添加</title>
+		<title><spring:message code="book-AddNewBook"></spring:message></title>
 
 		<meta http-equiv="pragma" content="no-cache">
 		<meta http-equiv="cache-control" content="no-cache">
@@ -37,7 +38,7 @@
 		<form id="myform" name="myform" method="post"
 			action="employee/save.html" enctype="multipart/form-data">
 			<p class="dqgongneng"> 
-				员工基本信息
+			<spring:message code="empolyee-BasicEmployeeInfo"></spring:message>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
 				<font color="red"> ${addf}</font>
 			</p>
@@ -46,7 +47,7 @@
 				border="0" >
 				<tr>
 					<td bgcolor="#F4F5F9" >
-						姓名
+					<spring:message code="empolyee-Name"></spring:message>
 					</td>
 					<td>
 						<input type="text" name="name" value="${dhl.name }"/>
@@ -54,7 +55,7 @@
 				</tr>
 				<tr>
 					<td bgcolor="#F4F5F9" >
-						工号
+					<spring:message code="empolyee-ID"></spring:message>
 					</td>
 					<td>
 						<input type="text" name="enumber" value="${dhl.enumber}"/>
@@ -67,9 +68,9 @@
 			<br />
 			<div style="text-align : center">
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="submit" value="提交" class="tjan">
+			<input type="submit" value=<spring:message code="empolyee-Submit"></spring:message> class="tjan">
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="button" value="返回" class="tjan" onclick="javascript:history.go(-1);">
+			<input type="button" value=<spring:message code="empolyee-Return"></spring:message> class="tjan" onclick="javascript:history.go(-1);">
 			<br />
 			<br />
 			</div>

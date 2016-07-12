@@ -99,7 +99,7 @@ public class EmployeeAction {
 	public String delete(HttpServletRequest request, ModelMap modelMap,
 			@PathVariable(value = "id") Integer id) {
 		Employee n = (Employee) es.getObjectById(Employee.class, id);
-		es.saveOrUpdate(n);
+		es.delete(n);
 		return "redirect:/employee/list.html";
 	}
 	

@@ -128,13 +128,13 @@ public class ManageAction {
 				int bcount = (e.getBorrowcount()==null)?0:e.getBorrowcount() + 1 ;
 				e.setBorrowcount(bcount);
 				
-				if(db.saveBookAndEmployeeAndRecord(b, e, r)){
-					
-					msg =  5 ;
+				if(db.saveBookAndEmployeeAndRecord(b, e, r)){					
+					msg =  5 ;					
 				}
 				else{
 					msg =  4 ;
 				}
+				return "redirect:/employee/listborrow/" + e.getId() + ".html";
 			}
 			
 		}
@@ -168,7 +168,7 @@ public class ManageAction {
 		b.setLeftcopy(left);
 		
 		db.saveBookAndEmployeeAndRecord(b, e, r);
-		return "redirect:/manage/list.html";
+		return "redirect:/employee/listborrow/" + e.getId() + ".html";
 		
 	}
 	

@@ -3,11 +3,11 @@
 <%@ taglib prefix="c" uri="/WEB-INF/c.tld"%>
 <%@ taglib prefix="fmt" uri="/WEB-INF/fmt.tld"%>
 <%@ taglib uri="/WEB-INF/Pagination.tld" prefix="p"%>
-
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>商品编辑</title>
+		<title><spring:message code="empolyee-BorrowBook"></spring:message></title>
 		<meta http-equiv="pragma" content="no-cache">
 		<meta http-equiv="cache-control" content="no-cache">
 		<meta http-equiv="expires" content="0">
@@ -32,7 +32,7 @@
 	</head>
 	<body>
 		<p class="dqgongneng">
-			员工管理
+			<spring:message code="empolyee-EmployeeManage"></spring:message>
 		</p>
 		<br />
 
@@ -41,21 +41,21 @@
 			<div class="anniuweizhi">
 				<select class="select_obj" name="key">
 					<option value="">
-						--请选择--
+						<spring:message code="empolyee-PleaseSelect"></spring:message>
 					</option>
 					<option value="name%"
 						<c:if test="${key eq 'name%'}">selected="selected"</c:if>>
-						姓名
+						<spring:message code="empolyee-Name"></spring:message>
 					</option>
 					<option value="enumber%"
 						<c:if test="${key eq 'enumber%'}">selected="selected"</c:if>>
-						工号
+						<spring:message code="empolyee-ID"></spring:message>
 					</option>					
 				</select>
 				<input type="text" class="sousuo" name="value" value="${value}">
 				<input type="image" src="image/sousuo.png" />
 				<a href="employee/add.html"><div>
-						+ 添加新员工
+				<spring:message code="empolyee-AddNewEmployee"></spring:message>
 					</div>
 				</a>
 			</div>
@@ -63,16 +63,16 @@
 				border="0">
 				<tr>
 					<th bgcolor="#F4F5F9" width="60">
-						序号
+						<spring:message code="empolyee-Sequence"></spring:message>
 					</th>
 					<th bgcolor="#F4F5F9">
-						姓名
+						<spring:message code="empolyee-Name"></spring:message>
 					</th>
 					<th bgcolor="#F4F5F9">
-						工号
+						<spring:message code="empolyee-ID"></spring:message>
 					</th>
 					<th bgcolor="#F4F5F9" width="140">
-						操作
+						<spring:message code="empolyee-Operation"></spring:message>
 					</th>
 				</tr>
 				<c:forEach items="${paging.list}" var="v" varStatus="index">
@@ -88,13 +88,13 @@
 						</td>					
 						<td style="text-align: center">
 							<a href="employee/update/${v.id}.html"><img
-									src="image/update.png" title="修改" />
-							</a>&nbsp;							
-							<a href="employee/delete/${v.id}.html" onclick="return confirm('删除以后数据将不可恢复\n确定删除吗？')"> <img src="image/del.png"
-									title="删除员工" />
-							</a>&nbsp;
+									src="image/update.png" title=<spring:message code="empolyee-Modify"></spring:message> />
+							</a><%-- &nbsp;							
+							<a href="employee/delete/${v.id}.html" onclick="return confirm(<spring:message code="empolyee-Warnning"></spring:message>)"> <img src="image/del.png"
+									title=<spring:message code="empolyee-Delete"></spring:message> />
+							</a> --%>&nbsp;
 							<a href="employee/listborrow/${v.id}.html"> 
-								<img src="image/zhishi.png" title="查看借书" />
+								<img src="image/zhishi.png" title=<spring:message code="empolyee-LookForBorrowed"></spring:message> />
 							</a>	
 						</td>
 					</tr>
