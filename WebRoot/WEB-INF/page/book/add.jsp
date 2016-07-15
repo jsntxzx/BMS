@@ -40,7 +40,8 @@
 			<p class="dqgongneng"> 
 				<spring:message code="book-BasicBookInfo"></spring:message>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-				<font color="red"> ${addf}</font>
+					<c:if test="${addf eq 1 }"><font color="red"><spring:message code="book-error1"></spring:message></font></c:if>
+					<c:if test="${addf eq 2 }"><font color="red"><spring:message code="book-error2"></spring:message></font></c:if>
 			</p>
 			<br />
 			<table width="96%" cellpadding="0" cellspacing="0" class="taba"
@@ -50,7 +51,7 @@
 						<spring:message code="book-BookTitle"></spring:message>
 					</td>
 					<td>
-						<input type="text" name="title" value="${dhl.title}"/>
+						<input type="text" name="title" id="title" value="${dhl.title}"/>
 					</td>
 				</tr>
 				<tr>
@@ -58,7 +59,7 @@
 						<spring:message code="book-SNNumber"></spring:message>
 					</td>
 					<td>
-						<input type="text" name="sn" value="${dhl.sn}"/>
+						<input type="text" name="sn" id="sn" value="${dhl.sn}" />
 					</td>
 				</tr>
 				<tr>
@@ -66,7 +67,7 @@
 						<spring:message code="book-CopiesTotal"></spring:message>
 					</td>
 					<td>
-						<input type="text" name="totalcopy" value="${dhl.totalcopy}"/>
+						<input type="text" name="totalcopy" id="totalcopy" value="${dhl.totalcopy}"/>
 					</td>
 				</tr>		
 				</table>
@@ -82,6 +83,34 @@
 			<br />
 			<br />
 			</div>
-		</form>		
+		</form>	
+		<script src="js/jquery.validate.js"></script>
+		<c:if test="${cookie.myAppLocaleCookie.value eq 'zh_CN' }">
+			<script src="js/localization/messages_zh.js"></script>
+		</c:if>
+		<script>
+		$().ready(function() {
+			$("#myform").validate({
+			rules: {
+				title: {
+					required: true,
+					minlength: 2,
+					maxlength: 100
+				},
+				sn: {
+					required: true,
+					minlength: 5,
+					maxlength: 100
+				},
+			
+				totalcopy: {
+					required: true,
+					digits: true,
+					range: [ 1, 1000 ]
+				}
+				}
+			});
+		});
+		</script>
 	</body>
 </html>

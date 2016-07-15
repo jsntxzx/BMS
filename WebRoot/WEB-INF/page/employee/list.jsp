@@ -71,10 +71,22 @@
 					<th bgcolor="#F4F5F9">
 						<spring:message code="empolyee-ID"></spring:message>
 					</th>
+					<th bgcolor="#F4F5F9">
+						<spring:message code="empolyee-borrowcount"></spring:message>
+					</th>
 					<th bgcolor="#F4F5F9" width="140">
 						<spring:message code="empolyee-Operation"></spring:message>
 					</th>
 				</tr>
+					<c:if test="${paging.totalPage==0}">
+					<tr>
+						<td bgcolor="#F4F5F9" colspan="6" align="center" height="300">
+							<center>
+								<spring:message code="noresult"></spring:message>
+							</center>
+						</td>
+					</tr>
+				</c:if>
 				<c:forEach items="${paging.list}" var="v" varStatus="index">
 					<tr>
 						<td align="center">
@@ -85,14 +97,16 @@
 						</td>
 						<td style="text-align: center">
 							${v.enumber }
+						</td>
+						<td style="text-align: center">
+							${v.borrowcount }
 						</td>					
 						<td style="text-align: center">
-							<a href="employee/update/${v.id}.html"><img
-									src="image/update.png" title=<spring:message code="empolyee-Modify"></spring:message> />
-							</a><%-- &nbsp;							
+							<a href="employee/update/${v.id}.html"><img src="image/update.png" title=<spring:message code="empolyee-Modify"></spring:message> />
+							</a>&nbsp;							
 							<a href="employee/delete/${v.id}.html" onclick="return confirm(<spring:message code="empolyee-Warnning"></spring:message>)"> <img src="image/del.png"
 									title=<spring:message code="empolyee-Delete"></spring:message> />
-							</a> --%>&nbsp;
+							</a>&nbsp;
 							<a href="employee/listborrow/${v.id}.html"> 
 								<img src="image/zhishi.png" title=<spring:message code="empolyee-LookForBorrowed"></spring:message> />
 							</a>	
@@ -102,7 +116,7 @@
 			</table>
 			<div class="fenleiDiv">
 				<p:outpage pageSize="${paging.pageSize}"
-					totalPage="${paging.totalPage}" curPage="${paging.curPage}" />
+					totalPage="${paging.totalPage}" curPage="${paging.curPage}" language="${cookie.myAppLocaleCookie.value}" />
 			</div>
 			<br />
 		</form>

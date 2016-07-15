@@ -14,6 +14,7 @@
 		<base href="<%=basePath%>" />
 		<title><spring:message code="systemname"></spring:message>- <sitemesh:write property='title' />
 		</title>
+		<link rel='shortcut icon' href='image/favicon.ico' type='image/x-icon'/ >
 		<link rel="stylesheet" href="css/agentStyle.css" type="text/css"></link>
 		<link rel="stylesheet" href="css/style.css" type="text/css"></link>
 		<script src="js/jquery-1.8.3.min.js"></script>
@@ -31,7 +32,7 @@
 			<table width="1140" cellpadding="0" cellspacing="0" align="center"
 				border="0">
 				<tr>
-					<td class="htlogo_m">
+					<td class="htlogo_m" onclick="window.location='<%=basePath%>'">
 						<img src="image/trend_logo.png"></img>
 						<spring:message code="systemname"></spring:message>
 						<span class="beat">beta</span>
@@ -59,9 +60,9 @@
 						
 						
 						<font color="#E7E7EB">|</font>&nbsp;
-						<a href="?language=zh_CN"><spring:message code="lan1"></spring:message></a></a> &nbsp;
+						<a  onclick="reload('zh_CN')"><spring:message code="lan1"></spring:message></a></a> &nbsp;
 						<font color="#E7E7EB">|</font>&nbsp;
-						<a href="?language=en"><spring:message code="lan2"></spring:message></a></a> 
+						<a  onclick="reload('en')"><spring:message code="lan2"></spring:message></a></a> 
 					</td>
 				</tr>
 			</table>
@@ -84,7 +85,7 @@
 					</ul>
 					<hr class="m_hr" />
 					<p>
-						<img src="image/shezhi.png" align="absmiddle" />
+						<img src="image/icon_menu_statistics.png" align="absmiddle" />
 						&nbsp; <spring:message code="category2"></spring:message>
 					</p>
 					<ul class="m_ul">
@@ -94,7 +95,7 @@
 					</ul>
 					<hr class="m_hr" />
 					<p>
-						<img src="image/shezhi.png" align="absmiddle" />
+						<img src="image/icon_menu_statistics.png" align="absmiddle" />
 						&nbsp; <spring:message code="category3"></spring:message>
 					</p>
 					<ul class="m_ul">
@@ -127,6 +128,16 @@
 		</div>
 	
 		<script type="text/javascript">
+		function reload(str){
+			document.cookie = "myAppLocaleCookie=" + str ;
+			var url = window.location.href;    
+			if (url.indexOf('?') > -1){
+			   url=url.substr(0, url.indexOf("?")) ;
+			}
+			window.location.href = url + '?language=' + str;
+		}
+		
+		
           /* 当鼠标移到表格上是，当前一行背景变色 */
 	      $(document).ready(function(){
 	            $(".tab tr td").mouseover(function(){

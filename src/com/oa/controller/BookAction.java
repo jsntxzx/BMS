@@ -2,6 +2,7 @@ package com.oa.controller;
 
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.oa.entity.Book;
+import com.oa.entity.Record;
 import com.oa.service.BookService;
+import com.oa.service.RecordService;
 import com.oa.util.Paging;
 
 
@@ -25,6 +28,8 @@ public class BookAction {
 	
 	@Autowired
 	private BookService bs ;
+	@Autowired
+	private RecordService rs ;
 	
 	private int pageSize = 10 ;
 	
@@ -60,8 +65,17 @@ public class BookAction {
 			@RequestParam(value = "title") String title,
 			@RequestParam(value = "sn") String sn,
 			@RequestParam(value = "totalcopy") Integer totalcopy) {
+		
+		if(title == null || title.length() < 2 || title.length() > 100 
+				|| sn== null || sn.length() < 5 || sn.length() > 100 ||
+				totalcopy ==null || totalcopy < 1 || totalcopy > 1000)
+		{
+			modelMap.put("addf", 1 );			
+			return "page/book/add";
+		}
+		
 		Book n = null ;
-
+		
 		if(id == null)
 		{
 			n = new Book() ;
@@ -70,6 +84,12 @@ public class BookAction {
 		else
 		{
 			n = (Book) bs.getObjectById(Book.class, id);
+			if(n.getTotalcopy() > totalcopy)
+			{
+				modelMap.put("dhl", n);
+				modelMap.put("addf", 2);
+				return "page/book/add";
+			}
 		}
 		n.setTitle(title);
 		n.setSn(sn);	
@@ -101,6 +121,19 @@ public class BookAction {
 	public String add(HttpServletRequest request,
 			ModelMap modelMap){
 		return "page/book/add";
+	}
+	
+	@RequestMapping(value = "listborrow/{id}")
+	public String listborrow(HttpServletRequest request, ModelMap modelMap,
+			@PathVariable(value = "id") Integer id) {
+		Book n = (Book) bs.getObjectById(Book.class, id);
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("bid", n);
+		map.put("status", 0);
+		List<?> l = rs.getAll(Record.class, map) ;
+		modelMap.put("list", l);
+		modelMap.put("basic", n);
+		return "page/book/borrowlist";
 	}
 
 }

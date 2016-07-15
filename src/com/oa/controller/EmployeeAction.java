@@ -68,7 +68,13 @@ public class EmployeeAction {
 			@RequestParam(value = "name") String name,
 			@RequestParam(value = "enumber") String enumber) {
 		Employee n = null ;
-
+		if(name == null || name.length() < 2 || name.length() > 100
+				|| enumber == null || enumber.length() < 2 || enumber.length() > 100)
+		{
+			modelMap.put("addf", 1);
+			return "page/employee/add";
+		}
+		
 		if(id == null)
 		{
 			n = new Employee() ;

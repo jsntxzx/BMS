@@ -48,7 +48,12 @@
 				${basic.enumber }
 			</td>
 		</tr>
-		
+		<tr>
+			<td bgcolor="#F4F5F9" width="150"><spring:message code="employee-totalborrow"></spring:message></td>
+			<td>
+				${basic.borrowcount }
+			</td>
+		</tr>
 							
 						
 		<tr>

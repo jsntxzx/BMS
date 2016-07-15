@@ -48,7 +48,7 @@
 			<div class="search">
 					<select name="eid" class="chosen-select" style="width: 300px" >
 							<option value="">
-										<spring:message code="manage-PleaseSelect"></spring:message>
+										<spring:message code="manage-PleaseSelect1"></spring:message>
 								</option>
 							<c:forEach items="${el}" var="v">
 									<option value="${v.id}" <c:if test="${eid eq v.id}">selected="selected"</c:if>>
@@ -58,7 +58,7 @@
 						</select>	
 					<select name="bid" class="chosen-select" style="width: 300px" >
 							<option value="">
-										<spring:message code="manage-PleaseSelect"></spring:message>
+										<spring:message code="manage-PleaseSelect2"></spring:message>
 								</option>
 							<c:forEach items="${bl}" var="v">
 									<option value="${v.id}" <c:if test="${bid eq v.id}">selected="selected"</c:if>> 
@@ -89,6 +89,15 @@
 						<spring:message code="manage-Operation"></spring:message>
 					</th>
 				</tr>
+				<c:if test="${paging.totalPage==0}">
+					<tr>
+						<td bgcolor="#F4F5F9" colspan="6" align="center" height="300">
+							<center>
+								<spring:message code="noresult"></spring:message>
+							</center>
+						</td>
+					</tr>
+				</c:if>
 				<c:forEach items="${paging.list}" var="v" varStatus="index">
 					<tr>
 						<td align="center">
@@ -119,7 +128,7 @@
 			</table>
 			<div class="fenleiDiv">
 				<p:outpage pageSize="${paging.pageSize}"
-					totalPage="${paging.totalPage}" curPage="${paging.curPage}" />
+					totalPage="${paging.totalPage}" curPage="${paging.curPage}" language="${cookie.myAppLocaleCookie.value}"/>
 			</div>
 			<br />
 		</form>

@@ -50,7 +50,7 @@
 					<spring:message code="empolyee-Name"></spring:message>
 					</td>
 					<td>
-						<input type="text" name="name" value="${dhl.name }"/>
+						<input type="text" name="name" id="name" value="${dhl.name }"/>
 					</td>
 				</tr>
 				<tr>
@@ -58,7 +58,7 @@
 					<spring:message code="empolyee-ID"></spring:message>
 					</td>
 					<td>
-						<input type="text" name="enumber" value="${dhl.enumber}"/>
+						<input type="text" name="enumber" id="enumber" value="${dhl.enumber}"/>
 					</td>
 				</tr>				
 				</table>
@@ -74,6 +74,29 @@
 			<br />
 			<br />
 			</div>
-		</form>		
+		</form>	
+		<script src="js/jquery.validate.js"></script>
+		<c:if test="${cookie.myAppLocaleCookie.value eq 'zh_CN' }">
+			<script src="js/localization/messages_zh.js"></script>
+		</c:if>
+		<script>
+		$().ready(function() {
+			$("#myform").validate({
+			rules: {
+				name: {
+					required: true,
+					minlength: 2,
+					maxlength: 100
+				},
+				enumber: {
+					required: true,
+					minlength: 5,
+					maxlength: 100
+				},
+			
+				}
+			});
+		});
+		</script>	
 	</body>
 </html>

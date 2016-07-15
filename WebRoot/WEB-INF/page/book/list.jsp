@@ -81,6 +81,15 @@
 						<spring:message code="book-Operation"></spring:message>
 					</th>
 				</tr>
+					<c:if test="${paging.totalPage==0}">
+					<tr>
+						<td bgcolor="#F4F5F9" colspan="6" align="center" height="300">
+							<center>
+								<spring:message code="noresult"></spring:message>
+							</center>
+						</td>
+					</tr>
+				</c:if>
 				<c:forEach items="${paging.list}" var="v" varStatus="index">
 					<tr>
 						<td align="center">
@@ -102,16 +111,19 @@
 							<a href="book/update/${v.id}.html"><img
 									src="image/update.png" title=<spring:message code="book-Modify"></spring:message> />
 							</a>&nbsp;							
-						<%-- 	<a href="book/delete/${v.id}.html" onclick="return confirm(<spring:message code="book-Warnning"></spring:message>)"> <img src="image/del.png"
+						<a href="book/delete/${v.id}.html" onclick="return confirm(<spring:message code="book-Warnning"></spring:message>)"> <img src="image/del.png"
 									title=<spring:message code="book-Delete"></spring:message> />
-							</a> --%>
+							</a> &nbsp;
+							<a href="book/listborrow/${v.id}.html"> 
+								<img src="image/zhishi.png" title=<spring:message code="empolyee-LookForBorrowed"></spring:message> />
+							</a>	
 						</td>
 					</tr>
 				</c:forEach>
 			</table>
 			<div class="fenleiDiv">
 				<p:outpage pageSize="${paging.pageSize}"
-					totalPage="${paging.totalPage}" curPage="${paging.curPage}" />
+					totalPage="${paging.totalPage}" curPage="${paging.curPage}" language="${cookie.myAppLocaleCookie.value}" />
 			</div>
 			<br />
 		</form>

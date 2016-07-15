@@ -1,6 +1,7 @@
 package com.oa.util;
 
 import java.io.IOException;
+import java.util.Properties;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
@@ -14,10 +15,20 @@ public class PaginationTag extends TagSupport{
 	private String curPage;
 	private String totalPage;
 	private String pageSize;
-
+	private String language ;
+	
 	public int doStartTag() throws JspException {
 		
 	 totalPage=StringUtils.isBlank(totalPage)==false?totalPage:"0";
+	 language = StringUtils.isBlank(language)==false?language:"en" ;
+	 
+	 Properties prop = new Properties();  
+	 try {
+		prop.load(PaginationTag.class.getClassLoader().getResourceAsStream("message_" + language + ".properties"));
+	} catch (IOException e1) {
+		e1.printStackTrace();
+	}  
+	 
 	  JspWriter out = pageContext.getOut();
 	  if (pageSize == null || pageSize == "") {
 		  pageSize = "1";
@@ -36,12 +47,13 @@ public class PaginationTag extends TagSupport{
 	  try {
 		  out.print("<span id='fenye'>");
 		  if(pageNumber>1){
-		  out.print("<span onclick=page(0) style=\"cursor: hand;cursor:pointer; border: 1px solid #DBDBDB; padding:3px;background-color:#F5F5F4\">&nbsp;首页&nbsp;</span>&nbsp;");
+		  out.print("<span onclick=page(0) style=\"cursor: hand;cursor:pointer; border: 1px solid #DBDBDB; padding:3px;background-color:#F5F5F4\">&nbsp;" + 
+			prop.getProperty("firstpage") +"&nbsp;</span>&nbsp;");
 		  if((Integer.parseInt(curPage)-1<0)){
-			  out.print("<span style=\"cursor: hand;cursor:pointer; border: 1px solid #DBDBDB; padding:3px;background-color:#F5F5F4\"><< 上一页</span>&nbsp;");
+			  out.print("<span style=\"cursor: hand;cursor:pointer; border: 1px solid #DBDBDB; padding:3px;background-color:#F5F5F4\"><< " + prop.getProperty("previouspage") + "</span>&nbsp;");
 		  }else{
 			  out.print("<span style=\"cursor: hand;cursor:pointer; border: 1px solid #DBDBDB; padding:3px;background-color:#F5F5F4\" " +
-				  		"onclick=page("+(Integer.parseInt(curPage) - 1)+")><< 上一页</span>&nbsp;&nbsp;");
+				  		"onclick=page("+(Integer.parseInt(curPage) - 1)+")><< " +  prop.getProperty("previouspage") + "</span>&nbsp;&nbsp;");
 		  }
 		 
 		  
@@ -68,23 +80,23 @@ public class PaginationTag extends TagSupport{
 			    }
 		  }
 		  if(Integer.parseInt(curPage)>=pageNumber-1){
-			  out.print("<span style=\"cursor: hand;cursor:pointer; border: 1px solid #DBDBDB; padding:3px;background-color:#F5F5F4\">最后一页 >></span>&nbsp;");
+			  out.print("<span style=\"cursor: hand;cursor:pointer; border: 1px solid #DBDBDB; padding:3px;background-color:#F5F5F4\">" +  prop.getProperty("lastpage") + " >></span>&nbsp;");
 		  }else{
 			  out.print("<span style=\"cursor: hand;cursor:pointer; border: 1px solid #DBDBDB; padding:3px;background-color:#F5F5F4\" " +
-				  		"onclick=page("+(Integer.parseInt(curPage)+1)+")>下一页 >></span><span class=f7_1>" +
+				  		"onclick=page("+(Integer.parseInt(curPage)+1)+")>" +  prop.getProperty("nextpage") + " >></span><span class=f7_1>" +
 				  				"</span><span></span><span></span>&nbsp;");
 		  }
 		  if(Integer.parseInt(curPage)>=pageNumber-1){
 			  out.print("<span></span>");
 		  }else{
-			  out.print("<span onclick=page("+(pageNumber-1)+") style=\"cursor: hand;cursor:pointer; border: 1px solid #DBDBDB; padding:3px;background-color:#F5F5F4\">&nbsp;末页&nbsp;</span>");
+			  out.print("<span onclick=page("+(pageNumber-1)+") style=\"cursor: hand;cursor:pointer; border: 1px solid #DBDBDB; padding:3px;background-color:#F5F5F4\">&nbsp;" + prop.getProperty("lastpage") + "&nbsp;</span>");
 		  }
 		  out.print("&nbsp;<input maxlength=4 style=\"height:24px;\" id=\"jump\" size=\"1\">&nbsp;");
 		  out.print("<span style=\"cursor: hand;cursor:pointer; border: 1px solid #DBDBDB; padding:3px;background-color:#F5F5F4\" " +
-			  		"onclick=jumppage()>跳页 -></span>&nbsp;");
+			  		"onclick=jumppage()>"+  prop.getProperty("jumppage") + " -></span>&nbsp;");
 		  out.print("</span>");
 		  out.println("<input type=hidden id='curPage' name=curPage value='0'>");
-		  out.println("<p>共 " + totalPage + " 条记录</p>");
+		  out.println("<p> " + totalPage + " " +  prop.getProperty("totalrecords") + "</p>");
 		  out.println("<script type=\"text/javascript\">");
 		  out.println("function page(n){");
 		  out.println("document.getElementById(\"curPage\").value=n;");
@@ -96,13 +108,13 @@ public class PaginationTag extends TagSupport{
 		  out.println("var jump = document.getElementById(\"jump\").value ; ");
 		  out.println("if(isNaN(jump))");
 		  out.println("{");
-		  out.println(" alert(\"请输入整数！\");");
+		  out.println(" alert(\"" +  prop.getProperty("alert1") + "\");");
 		  out.println("return false;");
 		  out.println("}");
 		  out.println("var page = jump - 1;");
 		  out.println("if( page <0 || page >=" + Integer.toString(pageNumber) + ")");
 		  out.println("{");
-		  out.println(" alert(\"错误的跳转范围！\");");
+		  out.println(" alert(\"" +  prop.getProperty("alert2") +"\");");
 		  out.println("return false;");
 		  out.println("}");
 		  out.println("else{");
@@ -128,6 +140,10 @@ public class PaginationTag extends TagSupport{
 	}
 	public void setTotalPage(String totalPage) {
 	  this.totalPage = totalPage;
+	}
+
+	public void setLanguage(String language) {
+		this.language = language;
 	}
 
 }
