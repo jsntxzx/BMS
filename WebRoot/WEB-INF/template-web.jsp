@@ -121,12 +121,13 @@
 			</tr>
 		</table>
 		<br />
+		<footer>
 		<div class="guanyu">
 			<div class="guanyu_neirong">
 				 Copyright © 2016-2016 Trend School Group 3 .All Rights Reserved.
 			</div>
 		</div>
-	
+		</footer>
 		<script type="text/javascript">
 		function reload(str){
 			document.cookie = "myAppLocaleCookie=" + str ;

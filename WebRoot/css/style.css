@@ -12,6 +12,16 @@ body {
 	font-size: 14px;
 	background-color: #E7E8EB;
 	font-family: '微软雅黑', Verdana, Arial, Helvetica, sans-serif;
+	margin-bottom:70px;
+}
+
+footer {
+    position:fixed;
+    bottom:0px;
+    left:0px;
+    right:0px;
+    height:70px;
+    margin-bottom:0px;
 }
 
 a,img {

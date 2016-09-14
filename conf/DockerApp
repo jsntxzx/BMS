@@ -1,0 +1,6 @@
+FROM tomcat
+MAINTAINER jsntxzx
+
+ADD ./target/BMS.war /usr/local/tomcat/webapps/
+
+CMD ["catalina.sh", "run"]
